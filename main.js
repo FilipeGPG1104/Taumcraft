@@ -1,7 +1,5 @@
 const channelId = "UCKX9wbmSIeh-xB68GtHUWMw";
 
-/* CONTADOR */
-
 async function pegarInscritos(){
 
     try{
@@ -28,8 +26,6 @@ async function pegarInscritos(){
     }
 }
 
-/* CONVERTER DURAÇÃO */
-
 function converterDuracao(iso){
 
     const match = iso.match(
@@ -47,8 +43,6 @@ function converterDuracao(iso){
 
     return horas * 3600 + minutos * 60 + segundos;
 }
-
-/* VIDEOS */
 
 async function carregarVideos(){
 
@@ -143,13 +137,9 @@ async function carregarVideos(){
     }
 }
 
-/* INICIAR */
-
 pegarInscritos();
 
 carregarVideos();
-
-/* TEMA */
 
 const temaBtn =
 document.getElementById("temaBtn");
