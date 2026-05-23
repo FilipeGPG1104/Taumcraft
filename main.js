@@ -1,5 +1,3 @@
-const apiKey = "AIzaSyB-kX4RFkl0dfvmWFFHcZViK97Is1fv26Y";
-
 const channelId = "UCKX9wbmSIeh-xB68GtHUWMw";
 
 /* CONTADOR */
@@ -9,19 +7,14 @@ async function pegarInscritos(){
     try{
 
         const resposta = await fetch(
-
-`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`
-
+            "http://localhost:3000/api/inscritos"
         );
 
         const dados = await resposta.json();
 
-        const inscritos =
-        dados.items[0].statistics.subscriberCount;
-
         document.getElementById("subs").innerHTML =
 
-        Number(inscritos).toLocaleString("pt-BR")
+        Number(dados.inscritos).toLocaleString("pt-BR")
         + " inscritos";
 
     }
@@ -40,9 +33,7 @@ async function pegarInscritos(){
 function converterDuracao(iso){
 
     const match = iso.match(
-
-/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/
-
+        /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/
     );
 
     const horas =
@@ -63,62 +54,19 @@ async function carregarVideos(){
 
     try{
 
-        /* PLAYLIST DE UPLOADS */
-
-        const resCanal = await fetch(
-
-`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`
-
+        const resposta = await fetch(
+            "http://localhost:3000/api/videos"
         );
 
-        const dadosCanal =
-        await resCanal.json();
-
-        const uploads =
-
-        dadosCanal.items[0]
-        .contentDetails
-        .relatedPlaylists
-        .uploads;
-
-        /* PEGA VIDEOS */
-
-        const resVideos = await fetch(
-
-`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploads}&maxResults=20&key=${apiKey}`
-
-        );
-
-        const dadosVideos =
-        await resVideos.json();
+        const dadosVideos = await resposta.json();
 
         const container =
         document.getElementById("videosContainer");
 
-        for (const video of dadosVideos.items) {
-
-            const videoId =
-            video.snippet.resourceId.videoId;
-
-            /* DETALHES DO VIDEO */
-
-            const detalhes = await fetch(
-
-`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoId}&key=${apiKey}`
-
-            );
-
-            const dadosDetalhes =
-            await detalhes.json();
-
-            const duracaoISO =
-
-            dadosDetalhes.items[0]
-            .contentDetails
-            .duration;
+        for (const video of dadosVideos) {
 
             const duracaoSegundos =
-            converterDuracao(duracaoISO);
+            converterDuracao(video.duration);
 
             /* REMOVE SHORTS */
 
@@ -127,14 +75,14 @@ async function carregarVideos(){
                 continue;
             }
 
-            const titulo =
-            video.snippet.title;
+            const titulo = video.title;
 
-            const thumb =
-            video.snippet.thumbnails.high.url;
+            const thumb = video.thumbnail;
+
+            const videoId = video.videoId;
 
             const data =
-            new Date(video.snippet.publishedAt);
+            new Date(video.publishedAt);
 
             /* CARD */
 
