@@ -10,6 +10,13 @@ app.use(cors())
 const apiKey = process.env.API_KEY
 const channelId = process.env.CHANNEL_ID
 
+/* TESTE */
+
+app.get('/', (req, res) => {
+
+    res.send('Servidor funcionando!')
+})
+
 /* INSCRITOS */
 
 app.get('/api/inscritos', async (req, res) => {
@@ -24,17 +31,34 @@ app.get('/api/inscritos', async (req, res) => {
 
         const dados = await resposta.json()
 
+        console.log(dados)
+
+        if(!dados.items){
+
+            return res.status(400).json({
+
+                erro:'API inválida ou canal não encontrado',
+
+                detalhes:dados
+            })
+        }
+
         const inscritos =
         dados.items[0].statistics.subscriberCount
 
-        res.json({ inscritos })
+        res.json({
 
+            inscritos
+        })
     }
 
     catch(erro){
 
+        console.log('ERRO INSCRITOS:', erro)
+
         res.status(500).json({
-            erro:'Erro ao pegar inscritos'
+
+            erro: erro.message
         })
     }
 })
@@ -45,7 +69,7 @@ app.get('/api/videos', async (req, res) => {
 
     try{
 
-        /* PLAYLIST */
+        /* CANAL */
 
         const resCanal = await fetch(
 
@@ -55,6 +79,18 @@ app.get('/api/videos', async (req, res) => {
 
         const dadosCanal =
         await resCanal.json()
+
+        console.log(dadosCanal)
+
+        if(!dadosCanal.items){
+
+            return res.status(400).json({
+
+                erro:'Erro ao pegar canal',
+
+                detalhes:dadosCanal
+            })
+        }
 
         const uploads =
 
@@ -81,6 +117,8 @@ app.get('/api/videos', async (req, res) => {
             const videoId =
             video.snippet.resourceId.videoId
 
+            /* DETALHES */
+
             const detalhes = await fetch(
 
 `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${videoId}&key=${apiKey}`
@@ -94,7 +132,8 @@ app.get('/api/videos', async (req, res) => {
 
                 videoId,
 
-                title: video.snippet.title,
+                title:
+                video.snippet.title,
 
                 thumbnail:
                 video.snippet.thumbnails.high.url,
@@ -103,24 +142,30 @@ app.get('/api/videos', async (req, res) => {
                 video.snippet.publishedAt,
 
                 duration:
+
                 dadosDetalhes.items[0]
                 .contentDetails.duration
             })
         }
 
         res.json(videos)
-
     }
 
     catch(erro){
 
+        console.log('ERRO VIDEOS:', erro)
+
         res.status(500).json({
-            erro:'Erro ao pegar videos'
+
+            erro: erro.message
         })
     }
 })
 
+/* PORTA */
+
 app.listen(3000, () => {
 
-    console.log('Servidor rodando na porta 3000')
+    console.log('Servidor rodando em:')
+    console.log('http://localhost:3000')
 })
