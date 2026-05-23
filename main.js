@@ -68,8 +68,6 @@ async function carregarVideos(){
             const duracaoSegundos =
             converterDuracao(video.duration);
 
-            /* REMOVE SHORTS */
-
             if(duracaoSegundos < 90){
 
                 continue;
@@ -83,8 +81,6 @@ async function carregarVideos(){
 
             const data =
             new Date(video.publishedAt);
-
-            /* CARD */
 
             container.innerHTML += `
 
@@ -112,8 +108,6 @@ async function carregarVideos(){
             </div>
             `;
         }
-
-        /* SWIPER */
 
         new Swiper(".mySwiper", {
 
