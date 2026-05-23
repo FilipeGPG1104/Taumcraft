@@ -1,5 +1,58 @@
 const channelId = "UCKX9wbmSIeh-xB68GtHUWMw";
 
+/* LOADING */
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        const loading =
+        document.getElementById("loading");
+
+        loading.style.opacity = "0";
+
+        setTimeout(() => {
+
+            loading.style.display = "none";
+
+        },1000);
+
+    },1200);
+});
+
+/* PARTICULAS */
+
+tsParticles.load("tsparticles", {
+
+    particles:{
+
+        number:{
+            value:40
+        },
+
+        color:{
+            value:"#A4161A"
+        },
+
+        links:{
+
+            enable:true,
+
+            color:"#660708"
+        },
+
+        move:{
+            enable:true
+        },
+
+        size:{
+            value:2
+        }
+    }
+});
+
+/* INSCRITOS */
+
 async function pegarInscritos(){
 
     try{
@@ -12,9 +65,10 @@ async function pegarInscritos(){
 
         document.getElementById("subs").innerHTML =
 
-        Number(dados.inscritos).toLocaleString("pt-BR")
-        + " inscritos";
+        Number(dados.inscritos)
+        .toLocaleString("pt-BR")
 
+        + " inscritos";
     }
 
     catch(erro){
@@ -25,6 +79,8 @@ async function pegarInscritos(){
         console.log(erro);
     }
 }
+
+/* DURACAO */
 
 function converterDuracao(iso){
 
@@ -44,6 +100,8 @@ function converterDuracao(iso){
     return horas * 3600 + minutos * 60 + segundos;
 }
 
+/* VIDEOS */
+
 async function carregarVideos(){
 
     try{
@@ -52,10 +110,16 @@ async function carregarVideos(){
             "http://localhost:3000/api/videos"
         );
 
-        const dadosVideos = await resposta.json();
+        const dadosVideos =
+        await resposta.json();
 
         const container =
         document.getElementById("videosContainer");
+
+        const destaque =
+        document.getElementById("videoDestaque");
+
+        let primeiroVideo = true;
 
         for (const video of dadosVideos) {
 
@@ -75,6 +139,37 @@ async function carregarVideos(){
 
             const data =
             new Date(video.publishedAt);
+
+            /* VIDEO DESTAQUE */
+
+            if(primeiroVideo){
+
+                destaque.innerHTML = `
+
+                <a
+                href="https://youtube.com/watch?v=${videoId}"
+                target="_blank"
+                class="destaque-card">
+
+                    <img src="${thumb}">
+
+                    <div class="destaque-info">
+
+                        <h3>${titulo}</h3>
+
+                        <p>
+                        ${data.toLocaleDateString("pt-BR")}
+                        </p>
+
+                    </div>
+
+                </a>
+                `;
+
+                primeiroVideo = false;
+            }
+
+            /* CARDS */
 
             container.innerHTML += `
 
@@ -102,6 +197,8 @@ async function carregarVideos(){
             </div>
             `;
         }
+
+        /* SWIPER */
 
         new Swiper(".mySwiper", {
 
@@ -137,12 +234,19 @@ async function carregarVideos(){
     }
 }
 
-pegarInscritos();
-
-carregarVideos();
+/* TEMA */
 
 const temaBtn =
 document.getElementById("temaBtn");
+
+/* SALVAR */
+
+if(localStorage.getItem("tema") === "claro"){
+
+    document.body.classList.add("light-mode");
+
+    temaBtn.innerHTML = "🌙";
+}
 
 temaBtn.addEventListener("click", () => {
 
@@ -153,10 +257,48 @@ temaBtn.addEventListener("click", () => {
     ){
 
         temaBtn.innerHTML = "🌙";
+
+        localStorage.setItem("tema","claro");
     }
 
     else{
 
         temaBtn.innerHTML = "☀️";
+
+        localStorage.setItem("tema","escuro");
     }
 });
+
+/* BOTAO TOPO */
+
+const topoBtn =
+document.getElementById("topoBtn");
+
+window.addEventListener("scroll", () => {
+
+    if(window.scrollY > 300){
+
+        topoBtn.style.display = "block";
+    }
+
+    else{
+
+        topoBtn.style.display = "none";
+    }
+});
+
+topoBtn.addEventListener("click", () => {
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+    });
+});
+
+/* INICIAR */
+
+pegarInscritos();
+
+carregarVideos();

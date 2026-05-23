@@ -522,3 +522,247 @@ h1{
 
     color:#161A1D;
 }
+
+/* LOADING */
+
+#loading{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#0B090A;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:9999;
+
+    transition:1s;
+}
+
+#loading h1{
+
+    font-size:2rem;
+}
+
+#loading p{
+
+    color:#B1A7A6;
+
+    margin-top:1rem;
+}
+
+/* PARTICLES */
+
+#tsparticles{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-1;
+}
+
+/* BANNER */
+
+.banner{
+
+    width:100%;
+
+    height:14rem;
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    background:
+    linear-gradient(
+    rgba(0,0,0,.5),
+    rgba(11,9,10,1)
+    ),
+    url("Imagem/banner.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    z-index:-2;
+}
+
+/* DESTAQUE */
+
+.destaque{
+
+    width:min(72%,50rem);
+
+    margin:3rem auto 0;
+}
+
+.destaque h2{
+
+    font-size:0.75rem;
+
+    letter-spacing:0.2rem;
+
+    color:#FF758F;
+
+    margin-bottom:1rem;
+}
+
+.destaque-card{
+
+    display:flex;
+
+    gap:1rem;
+
+    background:#161A1D;
+
+    border-radius:1.2rem;
+
+    overflow:hidden;
+
+    text-decoration:none;
+
+    color:white;
+
+    border:0.0625rem solid rgba(255,0,60,0.12);
+
+    transition:.3s;
+}
+
+.destaque-card:hover{
+
+    transform:translateY(-0.2rem);
+
+    box-shadow:
+    0 0 1rem rgba(255,0,60,0.18);
+}
+
+.destaque-card img{
+
+    width:50%;
+
+    object-fit:cover;
+}
+
+.destaque-info{
+
+    padding:1rem;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+}
+
+.destaque-info h3{
+
+    font-size:1.1rem;
+
+    margin-bottom:0.5rem;
+}
+
+.destaque-info p{
+
+    color:#B1A7A6;
+
+    font-size:0.8rem;
+}
+
+/* BOTAO TOPO */
+
+#topoBtn{
+
+    position:fixed;
+
+    right:1rem;
+    bottom:1rem;
+
+    width:3rem;
+    height:3rem;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#161A1D;
+
+    color:white;
+
+    cursor:pointer;
+
+    display:none;
+
+    z-index:999;
+
+    border:0.0625rem solid rgba(255,0,60,0.15);
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+
+    width:0.5rem;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#A4161A;
+
+    border-radius:999rem;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:768px){
+
+    .destaque{
+
+        width:90%;
+    }
+
+    .destaque-card{
+
+        flex-direction:column;
+    }
+
+    .destaque-card img{
+
+        width:100%;
+    }
+}
+
+footer{
+
+    text-align:center;
+
+    padding:2rem 0;
+
+    color:#B1A7A6;
+
+    font-size:0.8rem;
+}
+
+#loadingLogo{
+
+    width:8rem;
+    height:8rem;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:0.25rem solid #660708;
+
+    box-shadow:
+    0 0 1.5rem rgba(255,0,60,0.25);
+}

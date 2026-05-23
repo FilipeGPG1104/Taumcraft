@@ -5,14 +5,19 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
+    <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Taumcraft</title>
 
     <!-- CSS -->
 
-    <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="style.css"
+    >
 
     <!-- SWIPER CSS -->
 
@@ -21,9 +26,49 @@
     href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
 
+    <!-- PARTICLES -->
+
+    <script
+    src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js">
+    </script>
+
 </head>
 
 <body>
+
+    <!-- LOADING -->
+
+    <div id="loading">
+        <img src="Imagem/Logo.jpg" alt="Logo" id="loadingLogo">
+        <h1>Taumcraft</h1>
+
+        <p>Loading...</p>
+
+    </div>
+
+    <!-- PARTICLES -->
+
+    <div id="tsparticles"></div>
+
+    <!-- BOTAO TEMA -->
+
+    <button id="temaBtn">
+
+        ☀️
+
+    </button>
+
+    <!-- BOTAO TOPO -->
+
+    <button id="topoBtn">
+
+        ↑
+
+    </button>
+
+    <!-- BANNER -->
+
+    <div class="banner"></div>
 
     <!-- HEADER -->
 
@@ -37,24 +82,41 @@
 
         <h1>Taumcraft</h1>
 
+        <!-- CONTADOR -->
+
         <div class="contador">
 
             <span id="subs">
+
                 Carregando...
+
             </span>
 
         </div>
 
-        <button id="temaBtn">
+        <!-- SUBTEXTO -->
 
-    ☀️
+        <p class="subtexto">
 
-</button>
+            Minecraft • Mods • Survival
+
+        </p>
+
     </header>
 
     <!-- MAIN -->
 
     <main>
+
+        <!-- VIDEO DESTAQUE -->
+
+        <section class="destaque">
+
+            <h2>ÚLTIMO VÍDEO</h2>
+
+            <div id="videoDestaque"></div>
+
+        </section>
 
         <!-- VIDEOS -->
 
@@ -63,6 +125,15 @@
             <div class="topo">
 
                 <h2>ÚLTIMOS VÍDEOS</h2>
+
+                <a
+                href="https://www.youtube.com/@taumcraft/videos"
+                target="_blank"
+                >
+
+                    Ver todos
+
+                </a>
 
             </div>
 
@@ -106,13 +177,17 @@
                     <h3>YouTube</h3>
 
                     <p>
+
                         Assista os vídeos do canal
+
                     </p>
 
                 </div>
 
                 <div class="seta">
+
                     ›
+
                 </div>
 
             </a>
@@ -138,13 +213,17 @@
                     <h3>Discord</h3>
 
                     <p>
+
                         Entre na comunidade
+
                     </p>
 
                 </div>
 
                 <div class="seta">
+
                     ›
+
                 </div>
 
             </a>
@@ -171,13 +250,17 @@
                     <h3>Instagram</h3>
 
                     <p>
+
                         Siga nas redes sociais
+
                     </p>
 
                 </div>
 
                 <div class="seta">
+
                     ›
+
                 </div>
 
             </a>
@@ -189,6 +272,12 @@
     <!-- FOOTER -->
 
     <footer>
+
+        <p>
+
+            © 2026 Taumcraft • Todos os direitos reservados
+
+        </p>
 
     </footer>
 
