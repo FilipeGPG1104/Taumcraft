@@ -58,7 +58,7 @@ async function pegarInscritos(){
     try{
 
         const resposta = await fetch(
-            "http://localhost:8888/api/inscritos"
+            "http://localhost:3000/api/inscritos"
         );
 
         const dados = await resposta.json();
